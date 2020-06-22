@@ -37,8 +37,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: true|
-|image|string|null: true|
+|body|text||
+|image|string||
 |group_id|integer|null: false, unique: true|
 |user_id|integer|null: false, unique: true|
 
