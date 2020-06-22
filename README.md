@@ -15,11 +15,10 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false, unique: true|
-|members|string|null: false, unique: true|
+|name|string|null: false, unique: true|
 
 ### Association
-- has_many :message
+- has_many :messages
 - has_many :users_groups
 - has_many :users, through: users_groups
 
@@ -38,7 +37,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: false|
+|body|text|null: true|
 |image|string|null: true|
 |group_id|integer|null: false, unique: true|
 |user_id|integer|null: false, unique: true|
