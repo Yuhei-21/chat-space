@@ -27,8 +27,8 @@
       }
       &__icon {
         display: flex;
-        list-style: none;
         justify-content: flex-end;
+        list-style: none;
         width: 60px;
         ul {
           display: flex;
@@ -39,6 +39,7 @@
         a {
           color: white;
           text-decoration: none;
+          margin-left: 5px;
         }
       }
     }
@@ -88,10 +89,14 @@
       align-items: center;
       &__edit {
       font-size: 16px;
-      margin: 0 20px;
       }
       a {
-        color: #38aef0;
+        display: block;
+        border: 1px solid #38AEF0;
+        color: #38AEF0;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 20px;
         text-decoration: none;
       }
     }
