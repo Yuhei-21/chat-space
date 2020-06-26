@@ -1,0 +1,28 @@
+.Chat-main
+  .group-info
+    .group-info__content1
+      .group-info__content1__group
+        test
+      .group-info__content1__member
+        Member : masa
+    .group-info__content2
+      .group-info__content2__edit
+        = link_to 'edit','#' 
+  .message-list
+    .message-list__content
+      .message-list__content__message1
+        .message-list__content__message1__text1
+          masa
+        .message-list__content__message1__text2
+          2019/11/20/(Wed) 17:43:01
+      .message-list__content__message2
+        おはよう
+  .form
+    %form.form__contents
+      .form__contents__input
+        %input.form__contents__input__text{"placeholder": "type a message", "type": "text"}
+        %label.form__contents__input__img
+          = icon('fas', 'image')
+          %input{type: "file"}
+      .form__contents__send
+        %input.form__contents__send__submit{"type": "submit", "value": "Send"}
