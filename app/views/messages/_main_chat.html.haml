@@ -2,27 +2,23 @@
   .group-info
     .group-info__content1
       .group-info__content1__group
-        test
+        = @group.name
       .group-info__content1__member
-        Member : masa
+        Member :
+        - @group.users.each do |user|
+          = user.name
     .group-info__content2
       .group-info__content2__edit
-        = link_to 'Edit','#' 
+        = link_to edit_group_path(@group) do
+          Edit
   .message-list
-    .message-list__content
-      .message-list__content__message1
-        .message-list__content__message1__text1
-          masa
-        .message-list__content__message1__text2
-          2020年06月26日 14時56分
-      .message-list__content__message2
-        おはよう
+    = render @messages
   .form
-    %form.form__contents
-      .form__contents__input
-        %input.form__contents__input__text{"placeholder": "type a message", "type": "text"}
-        %label.form__contents__input__img
-          = icon('fas', 'image')
-          %input{type: "file"}
-      .form__contents__send
-        %input.form__contents__send__submit{"type": "submit", "value": "Send"}
+    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
+      .form__contents
+        .form__contents__input
+          = f.text_field :content, class: 'form__contents__input__text', placeholder: 'type a message'
+          = f.label :image, class: 'form__contents__input__img' do
+            = icon('far', 'image', class: 'Form__icon')
+            = f.file_field :image, class: 'Hidden'
+        = f.submit 'Send', class: 'form__contents__send__submit'
