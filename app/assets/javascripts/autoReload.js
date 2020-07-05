@@ -2,7 +2,7 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       let html =
-        `<div class="message-list__content">
+        `<div class="message-list__content" data-message-id=${message.id}>
           <div class="message-list__content__message1">
             <div class="message-list__content__message1__text1">
               ${message.user_name}
@@ -21,7 +21,7 @@ $(function(){
       return html;
     } else {
       let html =
-        `<div class="message-list__content">
+        `<div class="message-list__content" data-message-id=${message.id}>
           <div class="message-list__content__message1">
             <div class="message-list__content__message1__text1">
               ${message.user_name}
@@ -39,28 +39,27 @@ $(function(){
       return html;
     };
   }
-
-  $('.Form').on('submit', function(e){
-    e.preventDefault();
-    let formData = new FormData(this);
-    let url = $(this).attr('action');
+  let reloadMessages = function() {
+    let last_message_id = $('.message-list__content:last').data("message-id");
     $.ajax({
-      url: url,
-      type: "POST",
-      data: formData,
+      url: "api/messages",
+      type: 'get',
       dataType: 'json',
-      processData: false,
-      contentType: false
+      data: {id: last_message_id}
     })
-    .done(function(data){
-      let html = buildHTML(data);
-      $('.message-list').append(html);
+    .done(function(messages) {
+      if (messages.length !== 0) {
+      let insertHTML = '';
+      $.each(messages, function(i, message) {
+        insertHTML += buildHTML(message)
+      });
+      $('.message-list').append(insertHTML);
       $('.message-list').animate({ scrollTop: $('.message-list')[0].scrollHeight});
-      $('form')[0].reset();
-      $('.form__contents__send__submit').prop('disabled', false);
+      }
     })
     .fail(function() {
-      alert("メッセージ送信に失敗しました");
+      alert('error');
     });
-  });
+  };
+  setInterval(reloadMessages, 7000);
 });
